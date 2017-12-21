@@ -68,7 +68,7 @@ class Socket
 
     private function initClient()
     {
-        $port = "8282";
+        $port = "8281";
         $host = "0.0.0.0";
 
         $this->client = new \swoole_websocket_server($host, $port);
