@@ -15,7 +15,7 @@ class GateWay
         'host' => '127.0.0.1',
         'port' => 6379,
         'database' => 14,
-        'password' => 123456,
+        'password' => 'Ghost4812',
     ];
 
     public function __construct(\swoole_websocket_server $server)

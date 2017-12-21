@@ -10,5 +10,6 @@ var Settings = function() {
 	{
 		// 运行在其它域名上
 		this.socketServer = 'ws://'+document.domain+':8282';
+		console.log(this.socketServer)
 	}
 }

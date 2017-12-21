@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Libraries\GateWay;
+use App\Libraries\MongoDB;
 
 /**
  * socket Service
@@ -68,7 +69,7 @@ class Socket
     private function initClient()
     {
         $port = "8282";
-        $host = "127.0.0.1";
+        $host = "0.0.0.0";
 
         $this->client = new \swoole_websocket_server($host, $port);
         $this->client->set([
@@ -107,8 +108,7 @@ class Socket
             case "login":
                 break;
             case 'update':
-                $member = $this->gateWay->getNum();
-                $size = $member % 20 == 1 ? 20 : 4;
+                $mongo = new MongoDB();
                 $status = [
                     'type' => 'update',
                     'id'    => $client,
@@ -117,7 +117,7 @@ class Socket
                     'x' => $message['x'] + 0,
                     'y' => $message['y'] + 0,
                     'life'  => 1,
-                    'size'  => $size,
+                    'size'  => $mongo->getGender($client) == 1 ? 20 : 4,
                     'name'  => isset($message['name']) ? $message['name'] : $this->names[array_rand($this->names)],
                     'authorized'    => false
                 ];
