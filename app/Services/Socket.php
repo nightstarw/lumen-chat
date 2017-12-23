@@ -68,7 +68,7 @@ class Socket
 
     private function initClient()
     {
-        $port = "8281";
+        $port = "8282";
         $host = "0.0.0.0";
 
         $this->client = new \swoole_websocket_server($host, $port);
@@ -87,6 +87,9 @@ class Socket
         $client = $request->fd;
 
         $this->gateWay->join($client);
+
+        $mongo = new MongoDB();
+        $mongo->setGender($client);
 
         $welcome = [
             'type' => 'welcome',
